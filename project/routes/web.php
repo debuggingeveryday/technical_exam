@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\UserLikesController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -14,14 +16,15 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/likes', function () {
-        return Inertia::render('Likes');
-    })->name('likes');
+
+    Route::group(['prefix' => 'your-likes', 'as' => 'your-likes.'], function () {
+        Route::get('/', [UserLikesController::class, 'index']);
+        Route::post('/like', [UserLikesController::class, 'like'])->name('like');
+        Route::post('/dislike', [UserLikesController::class, 'dislike'])->name('dislike');
+    });
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

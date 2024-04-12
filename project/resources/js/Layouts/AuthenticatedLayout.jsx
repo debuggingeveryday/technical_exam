@@ -29,8 +29,8 @@ export default function Authenticated({ user, header, children }) {
                                     Dashboard
                                 </NavLink>
                                 <NavLink
-                                    href={route("likes")}
-                                    active={route().current("likes")}
+                                    href={route("your-likes.")}
+                                    active={route().current("your-likes.")}
                                 >
                                     Likes
                                 </NavLink>
