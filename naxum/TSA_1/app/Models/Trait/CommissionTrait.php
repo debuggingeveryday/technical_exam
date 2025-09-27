@@ -8,7 +8,7 @@ use App\Constants\CommissionPercentage;
 
 trait CommissionTrait
 {
-    public function getCommissionsPercentage(): float
+    public function getCommissionsPercentage()
     {
         $referred_count = $this->purchaser->reffered_distributor_count;
 

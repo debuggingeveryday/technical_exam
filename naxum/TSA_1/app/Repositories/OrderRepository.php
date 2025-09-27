@@ -14,25 +14,27 @@ class OrderRepository
     {
         extract($filters);
 
-        $orders = Order::with(
-            [
-                'purchaser.distributor',
-                'purchaser.referredBy',
-                'purchaser' => function (Relation $query) {
-                    $query->withCount('referredBy as reffered_distributor_count');
-                },
-                'orderItem.product',
-            ])
-            ->when(! empty($distributor), function (Builder $query) use (&$distributor) {
+        $orders = Order::when(! empty($distributor), function (Builder $query) use (&$distributor) {
+            $query->withWhereHas('purchaser.distributor', function (Builder|Relation $query) use (&$distributor) {
                 if (is_numeric($distributor)) {
-                    $id = (int) $distributor;
+                    $id = $distributor;
                     $query->where('id', $id);
                 } elseif (is_string($distributor)) {
-                    $name = (string) $distributor;
+                    $name = $distributor;
                     $query->where('first_name', 'like', $name)
-                        ->orwhere('last_name', 'like', $name);
+                        ->orWhere('last_name', 'like', $name);
                 }
-            })
+            });
+        })
+            ->with(
+                [
+                    'purchaser.distributor',
+                    'purchaser.referredBy',
+                    'purchaser' => function (Relation $query) {
+                        $query->withCount('referredBy as reffered_distributor_count');
+                    },
+                    'orderItem.product',
+            ])
             ->whereHas('purchaser.userCategory.category', function (Builder $query) {
                 $query->where('id', CategoryConstants::CUSTOMER);
             })

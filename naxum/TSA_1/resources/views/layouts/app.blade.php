@@ -6,12 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@yield('title')</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <link href="css/style.css" rel="stylesheet">
+    @include('partials.style')
 </head>
 
 <body>
     <header>
-        @yield('header')
+        @include('partials.header')
     </header>
     <main>
         <div class="@container">
@@ -21,7 +21,7 @@
         </div>
     </main>
     <footer>
-        @yield('footer')
+        @include('partials.footer')
     </footer>
 </body>
 

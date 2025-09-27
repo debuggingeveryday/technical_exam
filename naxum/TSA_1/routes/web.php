@@ -19,5 +19,8 @@ Route::get('/', function () {
     return view('index');
 })->name('index');
 
-Route::get('commission', [CommissionReportController::class, 'index'])->name('comission');
+Route::controller(CommissionReportController::class)->group(function () {
+    Route::get('/commission', 'index')->name('commission.index');
+});
+
 Route::get('distributor', [TopDistributorController::class, 'index'])->name('distributor');

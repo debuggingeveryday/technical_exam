@@ -4,8 +4,8 @@ namespace App\Utilities;
 
 class UserUtil
 {
-    public static function fullName(object $user): string
+    public static function fullName(?object $user): string
     {
-        return $user->first_name.' '.$user->last_name;
+        return ! empty($user) ? $user->first_name.' '.$user->last_name : '';
     }
 }

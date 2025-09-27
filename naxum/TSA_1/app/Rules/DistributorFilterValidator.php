@@ -33,16 +33,15 @@ class DistributorFilterValidator implements Rule
         if (is_numeric($value)) {
             $user_id = (int) $value;
 
-            $is_exists = $query->findOrFail($user_id)->exists();
+            return $query->findOrFail($user_id)->exists();
         } else {
             $name = (string) $value;
 
-            $is_exists = $query->where('first_name', 'like', $name)
+            return $query->where('first_name', 'like', $name)
                 ->orWhere('last_name', 'like', $name)
                 ->exists();
         }
 
-        return $is_exists;
     }
 
     /**

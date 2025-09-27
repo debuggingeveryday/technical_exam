@@ -4,27 +4,24 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\DistributorFilterRequest;
 use App\Http\Resources\CommissionReportResource;
 use App\Services\CommissionReportService;
 use App\Utilities\ObjectUtil;
+use Illuminate\Http\Request;
 
 class CommissionReportController extends Controller
 {
     public function __construct(private CommissionReportService $commissionReportService) {}
 
-    public function index(DistributorFilterRequest $request)
+    public function index(Request $request)
     {
-        $orders = $this->commissionReportService->getAllOrders($request->validated());
+        $orders = $this->commissionReportService->getAllOrders($request->query());
 
         $commissions = CommissionReportResource::collection($orders)->resolve();
 
         return view('pages.commission-report', [
             'data' => ObjectUtil::arrayToFluentCollection($commissions),
-            'links' => [
-                'paginator' => $orders->links()->paginator,
-                'element' => $orders->links()->element,
-            ],
+            'links' => $orders->links(),
         ]);
 
     }

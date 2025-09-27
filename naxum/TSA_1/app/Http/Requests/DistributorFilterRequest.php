@@ -26,6 +26,8 @@ class DistributorFilterRequest extends FormRequest
      */
     public function rules()
     {
+        // TODO: remove
+
         return [
             'distributor' => [new DistributorFilterValidator()],
             'date_from' => ['date', 'date_format:Y-m-d'],
