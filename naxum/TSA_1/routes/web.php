@@ -1,6 +1,7 @@
 <?php
 
-use App\Http\Controllers\ComissionReportController;
+use App\Http\Controllers\CommissionReportController;
+use App\Http\Controllers\TopDistributorController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('index');
-});
+})->name('index');
 
-Route::get('comission', [ComissionReportController::class, 'index']);
+Route::get('commission', [CommissionReportController::class, 'index'])->name('comission');
+Route::get('distributor', [TopDistributorController::class, 'index'])->name('distributor');
