@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Constants\Category as CategoryConstants;
 use App\Constants\Config;
 use App\Models\Order;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\Relation;
 
@@ -47,5 +48,14 @@ class OrderRepository
             ->paginate($limit ?? Config::PAGINATE_LIMIT);
 
         return $orders;
+    }
+
+    public function getTopDistributors()
+    {
+        $top_distributors = User::whereHas('userCategory.category', function (Builder $query) {
+            $query->where('id', CategoryConstants::DISTRIBUTOR);
+        })->get()->toArray();
+
+        return $top_distributors;
     }
 }

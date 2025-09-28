@@ -60,4 +60,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(User::class, 'referred_by');
     }
+
+    public function order(): HasMany
+    {
+        return $this->hasMany(Order::class, 'purchaser_id');
+    }
+
+    public function customer(): HasMany
+    {
+        return $this->hasMany(User::class, 'referred_by');
+    }
 }
