@@ -2,16 +2,14 @@
 
 declare(strict_types=1);
 
-namespace App\Models\Trait;
+namespace App\Utilities;
 
 use App\Constants\CommissionPercentage;
 
-trait CommissionTrait
+class CommissionUtil
 {
-    public function getCommissionsPercentage()
+    public static function getCommissionsPercentage($referred_count)
     {
-        $referred_count = $this->purchaser->reffered_distributor_count;
-
         if ($referred_count >= 4) {
             return CommissionPercentage::FIVE_PERCENT;
         } elseif ($referred_count >= 5 && $referred_distributors_count <= 10) {
@@ -25,10 +23,5 @@ trait CommissionTrait
         }
 
         return 0;
-    }
-
-    public function getCommissions()
-    {
-        return $this->getCommissionsPercentage() * $this->getOrderSumUpPrice();
     }
 }

@@ -21,6 +21,7 @@ Route::get('/', function () {
 
 Route::controller(CommissionReportController::class)->group(function () {
     Route::get('/commission', 'index')->name('commission.index');
+    Route::get('/commission/{order?}', 'show')->name('commission.show');
 });
 
 Route::get('distributor', [TopDistributorController::class, 'index'])->name('distributor');

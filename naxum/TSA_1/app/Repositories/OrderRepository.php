@@ -8,6 +8,7 @@ use App\Models\Order;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\Relation;
+use Illuminate\Support\Fluent;
 
 class OrderRepository
 {
@@ -48,6 +49,19 @@ class OrderRepository
             ->paginate($limit ?? Config::PAGINATE_LIMIT);
 
         return $orders;
+    }
+
+    public function getOrderDetails(Order $order)
+    {
+        $order_details = $order->orderItem->load('product')->map(fn ($item) => [
+            'sku' => $item->product->sku,
+            'name' => $item->product->name,
+            'price' => $item->product->price,
+            'quantity' => $item->quantity,
+            'total' => $item->product->price * $item->quantity,
+        ])->mapInto(Fluent::class);
+
+        return $order_details;
     }
 
     public function getTopDistributors()

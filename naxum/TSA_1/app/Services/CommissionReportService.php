@@ -16,4 +16,11 @@ class CommissionReportService
 
         return $orders;
     }
+
+    public function showDetailOrder($order)
+    {
+        $order_detail = $this->orderRepository->getOrderDetails($order);
+
+        return $order_detail;
+    }
 }
