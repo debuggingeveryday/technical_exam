@@ -6,7 +6,9 @@
 
 ### Installation
 
-in directory execute this
+buld this project in docker
+
+in directory:
 ```
 docker-compose up -d
 ```
