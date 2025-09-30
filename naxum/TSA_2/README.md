@@ -22,3 +22,4 @@ php artisan migrate
 yarn dev # to run development
 npx vite build # to build project
 ```
+

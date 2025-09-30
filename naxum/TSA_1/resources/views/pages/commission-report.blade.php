@@ -42,7 +42,7 @@
         <tbody>
             @foreach ($data as $item)
                 <tr>
-                    <td class="border border-gray-200 py-1 px-4">{{ $item->id }}</td>
+                    <td class="border border-gray-200 py-1 px-4">{{ $item->invoice_number }}</td>
                     <td class="border border-gray-200 py-1 px-4">{{ $item->purchaser }}</td>
                     <td class="border border-gray-200 py-1 px-4">{{ $item->distributor }}</td>
                     <td class="border border-gray-200 py-1 px-4">{{ $item->reffered_distributor }}</td>

@@ -16,18 +16,17 @@ class OrderRepository
     {
         extract($filters);
 
-        $orders = Order::when(! empty($distributor), function (Builder $query) use (&$distributor) {
-            $query->withWhereHas('purchaser.distributor', function (Builder|Relation $query) use (&$distributor) {
-                if (is_numeric($distributor)) {
-                    $id = $distributor;
-                    $query->where('id', $id);
-                } elseif (is_string($distributor)) {
-                    $name = $distributor;
-                    $query->where('first_name', 'like', $name)
-                        ->orWhere('last_name', 'like', $name);
-                }
+        $orders = Order::when(! empty($distributor) && ! is_numeric($distributor), function (builder $query) use (&$distributor) {
+            $query->withwherehas('purchaser.distributor', function (builder|relation $query) use (&$distributor) {
+                $query->where('first_name', 'like', $distributor)
+                    ->orwhere('last_name', 'like', $distributor);
             });
         })
+            ->when(! empty($distributor) && is_numeric($distributor), function (builder $query) use (&$distributor) {
+                $query->withwherehas('purchaser.distributor', function (builder|relation $query) use (&$distributor) {
+                    $query->where('id', '=', $distributor);
+                });
+            })
             ->with(
                 [
                     'purchaser.distributor',
