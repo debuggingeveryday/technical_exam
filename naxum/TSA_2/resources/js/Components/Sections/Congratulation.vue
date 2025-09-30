@@ -1,7 +1,7 @@
 <script setup lang="ts"></script>
 
 <template>
-    <div class="container flex h-[758px] flex-row justify-center text-center">
+    <div class="container h-[758px] mx-auto flex flex-row justify-center text-center">
         <div class="max-w-[760px] space-y-10 self-center">
             <h1 class="text-[40px] font-light text-primary">
                 CONGRATULATIONS
