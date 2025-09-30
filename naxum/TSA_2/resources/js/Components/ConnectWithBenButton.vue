@@ -5,7 +5,7 @@ import SiteImage from '@assets/images/sitename.png';
 <template>
     <button
         type="button"
-        class="md:h-[61px] w-full md:w-[343px] rounded-lg bg-[#456276] text-[22px] font-black text-white md:min-h-[64px] md:min-w-[359px] w-full"
+        class="w-full rounded-lg bg-[#456276] text-[22px] font-black text-white md:h-[61px] md:min-h-[64px] md:w-[343px] md:min-w-[359px]"
     >
         <div class="flex flex-row justify-center gap-2">
             <img :src="SiteImage" class="" />

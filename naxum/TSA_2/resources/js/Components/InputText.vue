@@ -1,6 +1,5 @@
 <script lang="ts" setup>
 import { computed } from 'vue';
-const model = defineModel();
 const props = defineProps(['placeholder', 'name', 'error']);
 
 const hasError = computed(() => !!props.error);
@@ -10,7 +9,6 @@ const hasError = computed(() => !!props.error);
     <div>
         <input
             type="text"
-            v-model="model"
             :name="props.name"
             :placeholder="props.placeholder"
             class="w-full border-0 border-b-[1px] border-neutral-500 p-0 text-[12px] font-light outline-none ring-0 focus:border-b-[1px] focus:border-blue-500 focus:outline-none focus:ring-0 md:text-[14px]"
