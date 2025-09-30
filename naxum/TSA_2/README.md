@@ -2,7 +2,7 @@
 
 ### requirements
 
--docker
+- Docker
 
 ### Installation
 
