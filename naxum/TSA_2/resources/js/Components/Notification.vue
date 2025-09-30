@@ -19,6 +19,14 @@ defineExpose({
 </script>
 
 <template>
+       <transition
+      enter-active-class="transition ease-out duration-300"
+      enter-from-class="opacity-0"
+      enter-to-class="opacity-100"
+      leave-active-class="transition ease-in duration-200"
+      leave-from-class="opacity-100"
+      leave-to-class="opacity-0"
+    >
     <div
         v-if="isShow"
         class="fixed right-4 top-4 rounded-b border-t-4 border-teal-500 bg-teal-100 px-4 py-3 text-teal-900 shadow-md"
@@ -42,4 +50,5 @@ defineExpose({
             </div>
         </div>
     </div>
+    </transition>
 </template>

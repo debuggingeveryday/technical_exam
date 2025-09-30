@@ -7,6 +7,8 @@ import { ref } from 'vue';
 
 const notification = ref<any>();
 
+const showModal = ref<boolean>(false);
+
 const handleSuccess = () => {
     console.log(notification);
     notification.value.show("You've been registered");
@@ -26,16 +28,27 @@ const handleSuccess = () => {
                 </h1>
             </div>
             <div class="md:w-[343px] min-w-[343px] flex justify-center mx-auto">
-                <ConnectWithBenButton />
+                <ConnectWithBenButton @click="showModal = true" />
             </div>
         </div>
     </div>
 
     <div
-        class="flex h-[774px] max-h-[1442px] flex-col items-center justify-center bg-neutral-900 bg-[url(@assets/images/learn-more-banner.png)] bg-cover bg-no-repeat bg-blend-soft-light"
+        class="flex h-[774px] max-h-[1442px] flex-col items-center justify-center bg-neutral-900 bg-[url(@assets/images/learn-more-banner.png)] bg-cover bg-no-repeat"
+        :class="[showModal ? 'bg-blend-soft-light' : '']"
+    >
+
+    <transition
+      enter-active-class="transition ease-out duration-300"
+      enter-from-class="opacity-0"
+      enter-to-class="opacity-100"
+      leave-active-class="transition ease-in duration-200"
+      leave-from-class="opacity-100"
+      leave-to-class="opacity-0"
     >
         <div
             class="max:w-[720px] grid min-h-[653px] grid-cols-1 bg-white md:w-[720px] md:grid-cols-2"
+            v-if="showModal"
         >
             <div
                 class="hidden bg-[url(@assets/images/learn-more-guy-with-cellphone.png)] bg-no-repeat md:block"
@@ -61,6 +74,7 @@ const handleSuccess = () => {
                 >
                     <span
                         class="h-[11px] w-[11px] self-end bg-[url(@assets/svgs/icon-close.svg)] text-default"
+                        @click="showModal = false"
                     ></span>
                     <div class="text-[27px] leading-[30px] text-primary">
                         REGISTER TO LEARN MORE
@@ -101,5 +115,6 @@ const handleSuccess = () => {
                 </div>
             </Form>
         </div>
+        </transition>
     </div>
 </template>
