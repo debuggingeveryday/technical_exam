@@ -1,50 +1,105 @@
 <script setup lang="ts">
-import { reactive } from 'vue';
-import ConnectWithBenButton from '@/Components/ConnectWithBenButton.vue'
-import InputText from '@/Components/InputText.vue'
+import ConnectWithBenButton from '@/Components/ConnectWithBenButton.vue';
+import InputText from '@/Components/InputText.vue';
+import Notification from '@/Components/Notification.vue';
+import { Form } from '@inertiajs/vue3';
+import { ref } from 'vue';
 
-const registerForm = reactive({
-    firstName: '',
-    lastName: '',
-    bestPhoneNumber: '',
-    email: ''
-});
+const notification = ref<any>();
 
+const handleSuccess = () => {
+    console.log(notification);
+    notification.value.show("You've been registered");
+};
 </script>
 
 <template>
-    <div class="bg-[#F0F1F2] h-[276px] flex flex-col justify-center">
-        <div class="flex flex-row justify-center items-center h-[27px]">
-            <div class="inline-block align-middle max-w-[576px]">
-                <h1 class="text-primary text-[45px]">WOULD YOU LIKE TO LEARN MORE?</h1>
+    <Notification ref="notification" />
+
+     <div
+        class="min-h-[276px] bg-[#F0F1F2] md:max-h-[276px] flex justify-center items-center"
+    >
+        <div class="md:w-3/5 w-full flex md:flex-row flex-wrap justify-between space-y-8">
+             <div class="align-middle self-center md:max-w-[576px]">
+                <h1 class="md:text-[45px] md:text-left text-center text-[30px] font-light text-primary">
+                    WOULD YOU LIKE TO LEARN MORE?
+                </h1>
             </div>
-            <div class="flex flex-col items-center">
+            <div class="md:w-[343px] min-w-[343px] flex justify-center mx-auto">
                 <ConnectWithBenButton />
             </div>
         </div>
     </div>
-    <div class="bg-no-repeat bg-cover bg-[url(@assets/images/learn-more-banner.png)] bg-neutral-900 bg-blend-soft-light h-[774px] max-h-[1442px] flex flex-col justify-center items-center">
-        <div class="w-[720px] h-[653px] bg-white grid grid-cols-2">
-            <div class="bg-[url(@assets/images/learn-more-guy-with-cellphone.png)] bg-no-repeat">
-            </div>
-            <div class="flex flex-col justify-center p-8 space-y-12">
-                <span class="text-default bg-[url(@assets/svgs/icon-close.svg)] h-[11px] w-[11px] self-end"></span>
-                <div class="text-primary text-[27px] leading-[30px]">
-                    REGISTER TO LEARN MORE
-                </div>
-                <div class="flex flex-col space-y-12">
-                    <InputText v-model="registerForm.firstName" placeholder="First Name" />
-                    <InputText v-model="registerForm.lastName" placeholder="Last Name" />
-                    <InputText v-model="registerForm.bestPhoneNumber" placeholder="Best Phone Number" />
-                    <InputText v-model="registerForm.email" placeholder="Email" />
+
+    <div
+        class="flex h-[774px] max-h-[1442px] flex-col items-center justify-center bg-neutral-900 bg-[url(@assets/images/learn-more-banner.png)] bg-cover bg-no-repeat bg-blend-soft-light"
+    >
+        <div
+            class="max:w-[720px] grid min-h-[653px] grid-cols-1 bg-white md:w-[720px] md:grid-cols-2"
+        >
+            <div
+                class="hidden bg-[url(@assets/images/learn-more-guy-with-cellphone.png)] bg-no-repeat md:block"
+            ></div>
+            <Form
+                :action="route('register')"
+                method="post"
+                @success="handleSuccess"
+                #default="{ errors, hasError }"
+                :options="{
+                    preserveScroll: true,
+                    preserveState: true,
+                }"
+                resetOnSuccess
+            >
+                <div
+                    :class="[
+                        'flex flex-col justify-center p-8',
+                        Object.keys(errors).length > 0
+                            ? 'space-y-7'
+                            : 'space-y-11',
+                    ]"
+                >
+                    <span
+                        class="h-[11px] w-[11px] self-end bg-[url(@assets/svgs/icon-close.svg)] text-default"
+                    ></span>
+                    <div class="text-[27px] leading-[30px] text-primary">
+                        REGISTER TO LEARN MORE
+                    </div>
+                    <InputText
+                        name="first_name"
+                        placeholder="First Name"
+                        :error="errors.first_name"
+                    />
+                    <InputText
+                        name="last_name"
+                        placeholder="Last Name"
+                        :error="errors.last_name"
+                    />
+                    <InputText
+                        name="phone_number"
+                        placeholder="Best Phone Number"
+                        :error="errors.phone_number"
+                    />
+                    <InputText
+                        name="email"
+                        placeholder="Email"
+                        :error="errors.email"
+                    />
+
                     <div class="flex flex-col space-y-6">
-                        <img src="@assets/images/learn-more-captcha.png" class="-mt-6" />
-                        <button type="submit" class="bg-[#456276] font-bold text-white p-3 rounded-lg">Register Now</button>
+                        <img
+                            src="@assets/images/learn-more-captcha.png"
+                            class="-mt-6 md md:h-[99px] h-[88px]"
+                        />
+                        <button
+                            type="submit"
+                            class="rounded-lg bg-[#456276] p-3 font-bold text-white"
+                        >
+                            Register Now
+                        </button>
                     </div>
                 </div>
-            </div>
+            </Form>
         </div>
     </div>
 </template>
-
-

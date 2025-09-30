@@ -3,16 +3,16 @@ import Icon from '@/Components/Icon.vue';
 </script>
 
 <template>
-    <div
-        class="container mx-auto flex h-[180px] w-[1440px] flex-nowrap justify-between"
-    >
-        <img
-            src="@assets/images/logo.png"
-            class="h-[77px] w-[285px] self-center"
-            alt="No image"
-        />
-        <nav class="flex flex-row justify-between gap-24 self-center">
-            <ul class="nav flex w-[458px] items-center gap-8">
+    <div class="container mx-auto">
+        <div
+            class="grid-row-2 grid h-[180px] max-w-[1440px] justify-center sm:flex sm:flex-wrap sm:justify-between"
+        >
+            <img
+                src="@assets/images/logo.png"
+                class="h-[77px] w-[285px] self-center"
+                alt="No image"
+            />
+            <ul class="nav hidden max-w-[458px] gap-8 md:flex md:items-center">
                 <li class="nav__link--is-active">
                     <a href="#home">HOME</a>
                 </li>
@@ -26,21 +26,28 @@ import Icon from '@/Components/Icon.vue';
                     <a href="#beinfluencer">BE AN INFLUENCER</a>
                 </li>
             </ul>
-            <ul class="flex w-[156px] items-center gap-4">
-                <li>
-                    <Icon name="facebook" />
-                </li>
-                <li>
-                    <Icon name="slack" />
-                </li>
-                <li>
-                    <Icon name="linkedin" />
-                </li>
-                <li>
-                    <Icon name="twitter" />
-                </li>
-            </ul>
-        </nav>
+            <div class="flex justify-between gap-16 md:flex md:justify-between">
+                <ul class="flex self-center justify-self-start md:hidden">
+                    <li><Icon name="menu" /></li>
+                </ul>
+                <ul
+                    class="flex items-center gap-4 md:flex md:max-w-[156px] md:items-center md:gap-4"
+                >
+                    <li>
+                        <Icon name="facebook" />
+                    </li>
+                    <li>
+                        <Icon name="slack" />
+                    </li>
+                    <li>
+                        <Icon name="linkedin" />
+                    </li>
+                    <li>
+                        <Icon name="twitter" />
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
 </template>
 

@@ -1,9 +1,13 @@
 <script setup lang="ts"></script>
 
 <template>
-    <div class="container h-[758px] mx-auto flex flex-row justify-center text-center">
-        <div class="max-w-[760px] space-y-10 self-center">
-            <h1 class="text-[40px] font-light text-primary">
+    <div
+        class="container mx-auto flex h-[758px] flex-row justify-center text-center"
+    >
+        <div class="space-y-5 self-center md:max-w-[760px] md:space-y-10">
+            <h1
+                class="text-center text-[30px] font-light text-primary md:text-[40px]"
+            >
                 CONGRATULATIONS
             </h1>
             <p class="text-[23px] font-light text-default">

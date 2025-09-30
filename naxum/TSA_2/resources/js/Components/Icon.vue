@@ -3,11 +3,12 @@ import { computed, ref } from 'vue';
 
 import FacebookIcon from '@assets/svgs/icon-facebook.svg';
 import LinkedinIcon from '@assets/svgs/icon-linkedin.svg';
+import MenuIcon from '@assets/svgs/icon-menu.svg';
 import SlackIcon from '@assets/svgs/icon-slack.svg';
 import TwitterIcon from '@assets/svgs/icon-twitter.svg';
 
 const props = defineProps<{
-    name: 'facebook' | 'slack' | 'linkedin' | 'twitter';
+    name: 'facebook' | 'slack' | 'linkedin' | 'twitter' | 'menu';
 }>();
 
 const test = ref<string>('');
@@ -22,6 +23,8 @@ const icon = computed(() => {
             return LinkedinIcon;
         case 'twitter':
             return TwitterIcon;
+        case 'menu':
+            return MenuIcon;
         default:
             return '';
     }
